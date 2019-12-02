@@ -3,7 +3,7 @@
 const express = require('express')
 const router = express.Router()
 
-const bookService = require('./bookService')
+const bookService = require('./bookService') 
 
 // GET /books/
 router.route('/')
@@ -31,7 +31,8 @@ router.route('/')
         "bookData": {
           "name": "Moby Dick",
           "author": "Herman Melville",
-          "summary": "Really good book. It's about a lot of stuff"
+          "summary": "Really good book. It's about a lot of stuff",
+          "rating": 5 
         }
       }
     */
