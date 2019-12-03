@@ -4,6 +4,7 @@
   "description": "HackerYou Fullstack Masterclass Project",
   "main": "index.js",
   "scripts": {
+    "deploy": "",
     "test": "react-scripts test",
     "start:server": "nodemon api/server.js --ignore src/ --ignore build/ --ignore public/",
     "start:client": "react-scripts start",

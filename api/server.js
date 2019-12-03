@@ -12,6 +12,10 @@ const { router: bookRoutes } = require('./routes/books/bookRoutes')
 // 3. Require conatants
 const { URL, PORT } = require('./utils/constants')
 
+const publicPath = path.resolve(__dirname, '..', 'build');
+// same without the slash: app.use(express.static(publicPath));
+app.use('/', express.static(publicPath));
+
 // 4. Ensure that the router is parsing the request body to appropriately format incoming requests
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -37,3 +41,4 @@ mongoose
   .catch((err) => {
     console.error(err)
   })
+
