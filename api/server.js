@@ -25,6 +25,11 @@ app.use(express.urlencoded({ extended: true }))
 // 5. Utilise routes
 app.use('/api/books', bookRoutes)
 
+// must be this order last!!
+app.use('/*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+})
+
 // 6. Define configuration for mongodb
 const MONGO_CONFIG = {
   useNewUrlParser: true,
@@ -43,4 +48,5 @@ mongoose
   .catch((err) => {
     console.error(err)
   })
+
 

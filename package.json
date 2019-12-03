@@ -4,7 +4,7 @@
   "description": "HackerYou Fullstack Masterclass Project",
   "main": "index.js",
   "scripts": {
-    "deploy": "npm run build:client && node api/server.js",
+    "deploy": "node api/server.js",
     "build": "npm run build:client && npm run move:client",
     "test": "react-scripts test",
     "start:server": "nodemon api/server.js --ignore src/ --ignore build/ --ignore public/",
@@ -22,7 +22,7 @@
   "bugs": {
     "url": "https://github.com/HackerYou/con-ed-full-stack/issues"
   },
-  "homepage": "https://github.com/HackerYou/con-ed-full-stack#readme",
+  "homepage": "https://emmahughescodes-funtimes.herokuapp.com/",
   "dependencies": {
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
