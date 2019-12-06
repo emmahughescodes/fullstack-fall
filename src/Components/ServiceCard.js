@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function RecipeReviewCard(props) {
-  
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -56,7 +55,7 @@ export default function RecipeReviewCard(props) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-           {props.props.serviceName.charAt(0)}
+           {props.serviceName.charAt(0)}
           </Avatar>
         }
         action={
@@ -64,13 +63,13 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.props.serviceName}
-        subheader={props.props.location}
+        title={props.serviceName}
+        subheader={props.location}
       />
       {/* <Button variant="outlined" onclick={}>See Activities</Button> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.props.description}
+          {props.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
