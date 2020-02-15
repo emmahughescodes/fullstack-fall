@@ -5,6 +5,7 @@ import AppBar from './Components/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import {BrowserRouter as Router,Route, Redirect,Switch} from 'react-router-dom';
 import Main from "./Components/Main";
+import AddService from "./Components/AddService";
 import './App.css';
 
 const useStyles = makeStyles(theme => ({
@@ -48,6 +49,7 @@ class App extends Component {
             <Route
               exact
               path="/create"
+              component={AddService}
             />
             <Route
               exact

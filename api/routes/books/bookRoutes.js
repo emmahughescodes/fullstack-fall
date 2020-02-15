@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const express = require('express')
 const router = express.Router()
@@ -6,49 +6,32 @@ const router = express.Router()
 const bookService = require('./bookService') 
 
 // GET /books/
-router.route('/')
-  .get(async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
       // 1. Fetch all books from database
       const books = await bookService.listBooks()
       // 2. Respond with list of books
-      res.status(200).send({
-        data: books
-      })
+      res.status(200).send({data: books})
     } catch (e) {
       // 3. If error, send to the error handler
-      next(e)
+      res.status(500).json({"error": "internal server error"});
     }
   })
 
 // POST /books/
-router.route('/')
-  .post(async (req, res, next) => {
-    // 1. Get data from request body
-    // Format of the request for this destructuring would look like:
-    /*
-      {
-        "bookData": {
-          "name": "Moby Dick",
-          "author": "Herman Melville",
-          "summary": "Really good book. It's about a lot of stuff",
-          "rating": 5 
-        }
-      }
-    */
-    // Play around with the destructuring if you would like the request to be sent in a different way
-    const { bookData } = req.body
+router.post('/', async (req, res, next) => {
+  const { serviceName, location, description, participantCount } = req.body;
+  if ( !serviceName || serviceName === "" ) {
+    res.status(400).json({ "error": "serviceName must be provided" });
+    return;
+}
     try {
-      // 2. Create book from data
-      const book = await bookService.createBook(bookData)
-      // 3. Respond with created book
-      res.status(200).send({
-        data: [book]
-      })
-    } catch (e) {
-      // 4. If error, send to the error handler
-      next(e)
+      const book = await bookService.createBook({ serviceName, location, description, participantCount });
+      res.status(200).json({data: book});
+    } catch (ex) {
+        console.log(ex.message, "ex1");
+        res.status(500).json({"error": "internal server error from posting"});
     }
   })
 
-exports.router = router
+exports.router = router;

@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import ServiceCard from './ServiceCard';
+import { emptyStatement } from '@babel/types';
 
 const styles = theme => ({
   cardGrid: {
@@ -50,6 +51,7 @@ class Main extends Component {
   render() {
     const { classes, history } = this.props;
     const { books } = this.state;
+    
     // console.log(history);
     return (
       <React.Fragment>
@@ -77,6 +79,7 @@ class Main extends Component {
           <Typography variant="h3" align="left" color="textSecondary" paragraph>
             My Services
           </Typography>
+          { (books) ? (
           <Grid container spacing={4}>
             {books.map(book => (
               <Grid item key={book._id} xs={12} sm={6} md={4}>
@@ -86,11 +89,13 @@ class Main extends Component {
                     location={book.location}
                     description={book.description}
                     participantCount={book.participantCount}
-                    activities={book.activities}
                 />
               </Grid>
+            
             ))}
           </Grid>
+          ) : null
+        }
         </Container>
       </React.Fragment>
     );
