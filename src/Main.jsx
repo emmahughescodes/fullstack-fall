@@ -5,8 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import ServiceCard from './ServiceCard';
-import { emptyStatement } from '@babel/types';
+import Card from './Card';
 
 const styles = theme => ({
   cardGrid: {
@@ -51,14 +50,13 @@ class Main extends Component {
   render() {
     const { classes, history } = this.props;
     const { books } = this.state;
-    
     // console.log(history);
     return (
       <React.Fragment>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
               <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                Plan your party!
+                Book Listings
               </Typography>
               <div className={classes.heroButtons}>
                 <Grid container spacing={2} justify="center">
@@ -68,7 +66,7 @@ class Main extends Component {
                       color="primary"
                       onClick={() => { history.push('/create'); }}
                     >
-                      Add Service
+                      Add a Book
                     </Button>
                   </Grid>
                 </Grid>
@@ -77,25 +75,20 @@ class Main extends Component {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Typography variant="h3" align="left" color="textSecondary" paragraph>
-            My Services
+            My Books
           </Typography>
-          { (books) ? (
           <Grid container spacing={4}>
             {books.map(book => (
               <Grid item key={book._id} xs={12} sm={6} md={4}>
-                <ServiceCard
-                    id={book._id}
-                    serviceName={book.serviceName}
-                    location={book.location}
-                    description={book.description}
-                    participantCount={book.participantCount}
+                <Card 
+                  id={book._id}
+                  title={book.title}
+                  subtitle={book.authorName}
+                  pushToCard={this.pushToCard}
                 />
               </Grid>
-            
             ))}
           </Grid>
-          ) : null
-        }
         </Container>
       </React.Fragment>
     );

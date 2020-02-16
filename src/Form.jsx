@@ -59,12 +59,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AddService(props) {
+export default function Form(props) {
   const classes = useStyles();
-  const [serviceName, updateServiceName] = useState('');
-  const [location, updateLocation] = useState('');
-  const [description, updateDescription] = useState('');
-  const [participantCount, updateParticipantCount] = useState('');
+  const [rating, updateRating] = useState(1);
+  const [title, updateTitle] = useState('');
+  const [authorName, updateAuthorName] = useState('');
+  const [comment, updateComment] = useState('');
 
   async function createBook() {
     try {
@@ -74,16 +74,16 @@ export default function AddService(props) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          serviceName, 
-          location,
-          description, 
-          participantCount, 
+          authorName, 
+          comment, 
+          rating, 
+          title,
         })
       });
       const resp = await response.json();
       console.log(resp);
     } catch (ex) {
-      console.log(ex, "ex");
+      console.log(ex);
     }
   }
 
@@ -93,55 +93,59 @@ export default function AddService(props) {
       <form>
         <div>
           <Typography component="h6" variant="h6" align="left" color="textPrimary">
-            Add a Service
+            Add a Book
           </Typography>
         </div>
         <div>
-        <TextField
+          <TextField
             id="standard-multiline-flexible"
-            label="Service Name"
+            label="Author"
             multiline
             rowsMax="2"
             className={classes.textField}
             margin="normal"
-            value={serviceName}
-            onChange={(e) => { updateServiceName(e.target.value); }}
+            value={authorName}
+            onChange={(e) => { updateAuthorName(e.target.value); }}
           />
           <TextField
             id="standard-multiline-flexible"
-            label="Location"
+            label="Book Name"
             multiline
             rowsMax="2"
             className={classes.textField}
             margin="normal"
-            value={location}
-            onChange={(e) => { updateLocation(e.target.value); }}
+            value={title}
+            onChange={(e) => { updateTitle(e.target.value); }}
           />
-          
-          <TextField
-          id="standard-number"
-          label="Number of Participants"
-          type="number"
-          className={classes.textField}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-          onChange={(e) => {updateParticipantCount(e.target.value);}}
-          value={participantCount}
-        />
+          <FormControl>
+            <InputLabel shrink htmlFor="select-multiple-native">
+              Rating
+            </InputLabel>
+            <NativeSelect
+            id="demo-customized-select-native"
+            value={rating}
+            onChange={(e) => {updateRating(e.target.value);}}
+            input={<BootstrapInput />}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </NativeSelect>
+          </FormControl>
         </div>
         <div>
           <TextField
             id="outlined-multiline-static"
-            label="description"
+            label="comment"
             multiline
             rowsMax="4"
             className={classes.textField}
             margin="normal"
             variant="outlined"
-            value={description}
-            onChange={(e) => { updateDescription(e.target.value); }}
+            value={comment}
+            onChange={(e) => { updateComment(e.target.value); }}
           />
         </div>
         <div>
@@ -155,7 +159,7 @@ export default function AddService(props) {
                 props.history.push("/");
               }}
             >
-            Add Service
+            Add Book
           </Button>
         </div>
       </form>
